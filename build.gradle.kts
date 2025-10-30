@@ -1,3 +1,6 @@
+import io.quarkus.gradle.tasks.QuarkusDev
+import io.quarkus.gradle.tasks.QuarkusRun
+
 plugins {
     kotlin("jvm") version "2.2.20"
     kotlin("plugin.allopen") version "2.2.20"
@@ -43,8 +46,25 @@ java {
     targetCompatibility = JavaVersion.VERSION_24
 }
 
+tasks.named<QuarkusDev>("quarkusDev") {
+    jvmArgs = listOf("--add-opens=java.base/java.lang=ALL-UNNAMED")
+}
+
+// (Optional) Also for `quarkusRun` if you use it
+tasks.withType<QuarkusRun>().configureEach {
+    jvmArgs = listOf("--add-opens=java.base/java.lang=ALL-UNNAMED")
+}
+
+// 1) Apply --add-opens to all JavaExec-based runs (covers quarkusDev)
+tasks.withType<JavaExec>().configureEach {
+    jvmArgs = listOf("--add-opens=java.base/java.lang=ALL-UNNAMED")
+
+}
+
 tasks.withType<Test> {
     systemProperty("java.util.logging.manager", "org.jboss.logmanager.LogManager")
+    jvmArgs = listOf("--add-opens=java.base/java.lang=ALL-UNNAMED")
+
 }
 allOpen {
     annotation("jakarta.ws.rs.Path")
