@@ -1,5 +1,6 @@
 import io.quarkus.gradle.tasks.QuarkusDev
 import io.quarkus.gradle.tasks.QuarkusRun
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "2.2.20"
@@ -80,4 +81,8 @@ kotlin {
         jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_24
         javaParameters = true
     }
+}
+val compileKotlin: KotlinCompile by tasks
+compileKotlin.compilerOptions {
+    freeCompilerArgs.set(listOf("-Xannotation-default-target=param-property"))
 }
