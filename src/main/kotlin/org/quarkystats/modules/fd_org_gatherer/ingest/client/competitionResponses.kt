@@ -24,6 +24,7 @@ enum class PlanTier {
 }
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JvmRecord
 data class CompetitionsResponse(
     val count: Int?,
     val filters: JsonNode?,               // {} in your sample; keep flexible
@@ -31,6 +32,7 @@ data class CompetitionsResponse(
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JvmRecord
 data class Competition(
     val id: Long?,
     val area: Area?,
@@ -45,6 +47,7 @@ data class Competition(
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JvmRecord
 data class Area(
     val id: Long?,
     val name: String?,
@@ -53,6 +56,7 @@ data class Area(
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JvmRecord
 data class Season(
     val id: Long?,
     val startDate: LocalDate?,            // "YYYY-MM-DD"
@@ -62,6 +66,7 @@ data class Season(
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JvmRecord
 data class TeamSummary(
     val id: Long?,
     val name: String?,
